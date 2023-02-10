@@ -6,7 +6,7 @@
 
 For this project I didn't have access to a local Oracle database. However, I found `https://apex.oracle.com` which gave me access to a browser workspace where I could run and test my PL/SQL code.
 
-The SQL script to create the tables and PL/SQL package procedure executed successfully on the APex workspace, but ultimately I'm not sure how closely the workspace mirrors a local Oracle database environment.
+The SQL script to create the tables and PL/SQL package procedure executed successfully on the APEX workspace, but ultimately I'm not sure how closely the workspace mirrors a local Oracle database environment.
 
 <br>
 
@@ -35,6 +35,6 @@ I was then able to test my PL/SQL package procedure and check that the INSERT an
 
 The test data includes 5 records with the `next_payment_date` set to `01-03-2023` which were picked up in the PL/SQL package procedure SELECT statement condition (`next_payment_date <= CURRENT_TIMESTAMP +30`). If this code was tested in the future the test data would need to updated.
 
-This screenshot shows the ProcessingLog table on the Apex workspace after the PL/SQL package procedure was run using the test data:
+This screenshot shows the ProcessingLog table on the APEX workspace after the PL/SQL package procedure was run using the test data:
 
 <img src="supporting-docs/images/logging-table.png" alt="isolated" width="100%"/>
