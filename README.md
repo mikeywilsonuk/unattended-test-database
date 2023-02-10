@@ -15,7 +15,7 @@ The SQL script to create the tables and PL/SQL package procedure executed succes
 * MemberProducts with a next payment date within a 30 day period are due a payment.
 * Membership numbers are stored as a VARCHAR data type
 * I implemented an Autonomous Transaction logging System to ensure the log messages persist regardless of the procedure outcome and transaction state. As I didn't have access to a local Oracle database I was unable to install a logging framework (i.e. Logger) and went with the approach of creating a new table to store log messages.
-* I included calls to the logging precedure within the loop iterating through the selected records on the basis the data set was small. If PL/SQL package procedure was executed on a large data set the logging procedure calls could be moved outside of the loop.
+* I included calls to the logging precedure within the loop iterating through the selected records on the basis the data set was small. If the PL/SQL package procedure was executed on a large data set the logging procedure calls could be moved outside of the loop to improve performance.
 
 <br>
 
@@ -33,8 +33,8 @@ To test the code I created dummy data (see `test-data.sql` in the `supporting-do
 
 I was then able to test my PL/SQL package procedure and check that the INSERT and UPDATE statements had executed corrcetly, and logging messages were created into the `ProcessingLog` table.
 
-The test data includes 5 records with the `next_payment_date` set to `01-03-2023` which were picked up in the PL/SQL package procedure SELECT statement condition (`next_payment_date within 30 days of the current date`).
+The test data includes 5 records with the `next_payment_date` set to `01-03-2023` which were picked up in the PL/SQL package procedure SELECT statement condition (`next_payment_date <= CURRENT_TIMESTAMP +30`). If this code was tested in the future the test data would need to updated.
 
-This screenshot shows the ProcessingLog table on the Apex workspace after the PL/SQL package procedure was executed on the test data:
+This screenshot shows the ProcessingLog table on the Apex workspace after the PL/SQL package procedure was run using the test data:
 
 <img src="supporting-docs/images/logging-table.png" alt="isolated" width="100%"/>
